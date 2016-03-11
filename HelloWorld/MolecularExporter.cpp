@@ -74,7 +74,8 @@ void MolecularExporter::processObject(MObject obj)
 	// output info about this processed object
 	/* TODO
 		- make output to file binary
-		- 
+		- output animation (= output all frames)
+		- output object/molecule type
 	*/
 	std::cout << nodeName.asChar() << std::endl;
 	std::cout << "Translation: " << translation.x << ", " << translation.y << ", " << translation.z << std::endl;
