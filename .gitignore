@@ -1,0 +1,6 @@
+*.opendb
+*.sdf
+*.sln
+*.vcxproj
+*.filters
+x64/
