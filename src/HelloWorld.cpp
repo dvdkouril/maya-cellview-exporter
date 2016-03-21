@@ -8,7 +8,7 @@
 // my includes
 #include "MolecularExporter.h"
 
-#define OUTPUT_FILE_PATH "E:\\dvdkouril\\Projects\\maya-test-scenes\\scene-out.txt"
+#define OUTPUT_FILE_PATH "C:\\Users\\dvdkouril\\Documents\\github-projects\\maya-cellview-exporter\\scene-out.txt"
 
 // This is a shortcut for implementing CellViewExport class...so far this is enough for me
 DeclareSimpleCommand(CellViewExport, "David Kouril (DVDOURIL)", "2016");
