@@ -1,6 +1,7 @@
 #pragma once
 
 #include <maya/MObject.h>
+#include <maya/MString.h>
 #include <fstream>
 
 class MolecularExporter {
@@ -12,8 +13,10 @@ private:
 public:
 	MolecularExporter(char * filePath);
 	void exportScene();
+	void exportScene2();
 
 private:
 	void processObject(MObject obj);
+	MString getObjectName(MObject obj);
 
 };

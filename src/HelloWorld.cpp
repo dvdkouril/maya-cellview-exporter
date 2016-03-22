@@ -15,9 +15,12 @@ DeclareSimpleCommand(CellViewExport, "David Kouril (DVDOURIL)", "2016");
 
 MStatus CellViewExport::doIt(const MArgList&)
 {
+
+	std::cout << "CellView Exporter" << std::endl;
 	MolecularExporter molExp = MolecularExporter(OUTPUT_FILE_PATH);
 
-	molExp.exportScene();
+	//molExp.exportScene();
+	molExp.exportScene2();
 
 	return MS::kSuccess;
 }
