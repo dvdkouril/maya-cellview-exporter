@@ -17,6 +17,7 @@ public:
 
 private:
 	void processObject(MObject obj);
+	void processParticleSystem(MObject obj);
 	MString getObjectName(MObject obj);
 
 };

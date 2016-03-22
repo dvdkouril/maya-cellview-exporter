@@ -26,7 +26,6 @@ void MolecularExporter::exportScene2()
 	std::cout << "\n" << std::endl;
 	std::cout << "Exporting scene.." << std::endl;
 
-	//MItDependencyNodes it(MFn::kInvalid);
 	MItDag it(MItDag::kDepthFirst, MFn::kNParticle);
 	while (!it.isDone())
 	{
@@ -34,7 +33,9 @@ void MolecularExporter::exportScene2()
 		MString name = this->getObjectName(obj);
 		std::cout << name.asChar() << ": " << obj.apiTypeStr() << std::endl;
 		if (obj.hasFn(MFn::kParticle)) {
-			std::cout << "YES!" << std::endl;
+			
+			processParticleSystem(obj);
+			/*std::cout << "YES!" << std::endl;
 
 			MFnParticleSystem fn(obj);
 
@@ -42,11 +43,46 @@ void MolecularExporter::exportScene2()
 			fn.position(positions);
 
 			std::cout << "particles count: " << fn.count() << std::endl;
-			std::cout << "positions count: " << positions.length() << std::endl;
+			std::cout << "positions count: " << positions.length() << std::endl;*/
 		}
 
 		it.next();
 	}
+}
+
+void MolecularExporter::processParticleSystem(MObject obj)
+{
+	if (!obj.hasFn(MFn::kParticle)) 
+	{
+		std::cout << "processParticleSystem: input not a particle system!" << std::endl;
+		return;
+	}
+
+	// I want to ignore bounds (which are also represented as elements of a particle system)
+	MString name = getObjectName(obj);
+	if ( strstr(name.asChar(), "Bonds") != NULL ) 
+	{
+		return;
+	}
+
+	MFnParticleSystem fn(obj);
+	MVectorArray positions;
+	fn.position(positions);
+
+	outputFile.open(this->filePath);
+	if (!outputFile) {
+		std::cout << "Error: file couldn't be opened." << std::endl;
+		return;
+	}
+
+	for (int i = 0; i < positions.length(); i++)
+	{
+		MVector vec = positions[i];
+		outputFile << "[" << vec.x << " " << vec.y << " " << vec.z << "]" << std::endl;
+		//outputFile << "[" << rotation.x << " " << rotation.y << " " << rotation.z << "]" << std::endl;
+	}
+
+	outputFile.close();
 }
 
 /*
